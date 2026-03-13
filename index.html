@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>초보 엄마 이유식 완벽 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ── PASSWORD SCREEN ── */
+  #pw-screen { position: fixed; inset: 0; background: #fdfcf8; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+  .pw-box { width: 320px; text-align: center; padding: 2.5rem 2rem; background: #fff; border: 0.5px solid #e2e0d8; border-radius: 16px; }
+  .pw-logo { font-family: 'Nanum Myeongjo', serif; font-size: 22px; font-weight: 700; color: #1D9E75; margin-bottom: 6px; }
+  .pw-sub { font-size: 13px; color: #5a5955; margin-bottom: 6px; }
+  .pw-blog { font-size: 12px; color: #1D9E75; margin-bottom: 24px; text-decoration: none; }
+  .pw-blog:hover { text-decoration: underline; }
+  .pw-input-wrap { display: flex; gap: 8px; margin-bottom: 8px; }
+  .pw-input-wrap input { flex: 1; padding: 10px 14px; border: 1px solid #e2e0d8; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.18s; }
+  .pw-input-wrap input:focus { border-color: #1D9E75; }
+  .pw-input-wrap button { padding: 10px 18px; background: #1D9E75; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: background 0.18s; }
+  .pw-input-wrap button:hover { background: #0F6E56; }
+  .pw-error { font-size: 12px; color: #D85A30; height: 16px; }
+  #main-content { display: none; }
+  :root {
+    --teal: #1D9E75; --teal-light: #E1F5EE; --teal-dark: #085041;
+    --blue: #378ADD; --blue-light: #E6F1FB; --blue-dark: #0C447C;
+    --amber: #BA7517; --amber-light: #FAEEDA; --amber-dark: #633806;
+    --coral: #D85A30; --coral-light: #FAECE7; --coral-dark: #712B13;
+    --gray: #5F5E5A; --gray-light: #F1EFE8; --gray-border: #e2e0d8;
+    --text: #1a1a18; --text-sub: #5a5955; --text-hint: #9a9891;
+    --bg: #fdfcf8; --bg-surface: #f7f5f0; --bg-card: #ffffff;
+    --radius: 12px; --radius-sm: 8px;
+  }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  /* ── NAV ── */
+  .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(253,252,248,0.95); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--gray-border); padding: 0 1.5rem; display: flex; align-items: center; gap: 1rem; height: 56px; }
+  .nav-logo { font-family: 'Nanum Myeongjo', serif; font-size: 15px; font-weight: 700; color: var(--teal); white-space: nowrap; }
+  .nav-links { display: flex; gap: 4px; overflow-x: auto; }
+  .nav-link { flex-shrink: 0; padding: 6px 14px; border-radius: 20px; font-size: 13px; color: var(--text-sub); cursor: pointer; transition: all 0.18s; border: none; background: none; font-family: 'Noto Sans KR', sans-serif; }
+  .nav-link:hover { background: var(--gray-light); }
+  .nav-link.active { background: var(--teal); color: #fff; font-weight: 500; }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding: 3.5rem 1.5rem 2.5rem; border-bottom: 0.5px solid var(--gray-border); }
+  .hero-badge { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 11px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.5px; }
+  .hero h1 { font-family: 'Nanum Myeongjo', serif; font-size: clamp(20px, 4vw, 28px); font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+  .hero p { font-size: 14px; color: var(--text-sub); max-width: 480px; margin: 0 auto; }
+
+  /* ── PAGE SECTIONS ── */
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+  .section-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+
+  /* ── SHARED COMPONENTS ── */
+  .sec-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .sec-title-bar { display: block; width: 3px; height: 18px; border-radius: 2px; }
+  .card { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 10px; }
+  .tag-teal { background: var(--teal-light); color: var(--teal-dark); }
+  .tag-amber { background: var(--amber-light); color: var(--amber-dark); }
+  .tag-coral { background: var(--coral-light); color: var(--coral-dark); }
+  .tag-blue { background: var(--blue-light); color: var(--blue-dark); }
+
+  /* ── TAB NAV ── */
+  .tab-nav { display: flex; gap: 6px; margin-bottom: 1.5rem; overflow-x: auto; padding-bottom: 4px; }
+  .tab-btn { flex-shrink: 0; padding: 8px 16px; border-radius: 20px; border: 0.5px solid var(--gray-border); background: var(--bg-card); font-size: 13px; color: var(--text-sub); cursor: pointer; transition: all 0.18s; font-family: 'Noto Sans KR', sans-serif; }
+  .tab-btn:hover { background: var(--bg-surface); }
+  .tab-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); font-weight: 500; }
+
+  /* ── MONTH CARDS ── */
+  .month-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  @media (max-width: 520px) { .month-grid { grid-template-columns: repeat(2, 1fr); } }
+  .month-card { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); padding: 0.875rem; cursor: pointer; transition: border-color 0.18s; }
+  .month-card:hover { border-color: var(--teal); }
+  .month-card.selected { border: 1.5px solid var(--teal); }
+  .month-label { font-size: 10px; color: var(--teal); font-weight: 500; margin-bottom: 4px; }
+  .month-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+
+  /* ── DETAIL BOX ── */
+  .detail-box { background: var(--bg-surface); border-radius: var(--radius); padding: 1.25rem; margin-top: 1rem; border-left: 3px solid var(--teal); border-radius: 0 var(--radius) var(--radius) 0; }
+  .detail-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 12px; }
+  .meta-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px; }
+  .meta-item { background: var(--bg-card); border-radius: var(--radius-sm); padding: 8px 10px; border: 0.5px solid var(--gray-border); font-size: 12px; color: var(--text-sub); }
+  .meta-item span { font-size: 10px; color: var(--teal); display: block; margin-bottom: 2px; }
+  .food-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .food-item { font-size: 12px; color: var(--text-sub); padding: 7px 10px; background: var(--bg-card); border-radius: var(--radius-sm); border: 0.5px solid var(--gray-border); }
+  .food-item strong { color: var(--text); font-weight: 500; display: block; }
+
+  /* ── SCHEDULE ── */
+  .schedule-grid { display: grid; grid-template-columns: 90px 1fr; border: 0.5px solid var(--gray-border); border-radius: var(--radius); overflow: hidden; margin-top: 1rem; }
+  .sch-time { font-size: 12px; color: var(--teal-dark); font-weight: 500; padding: 10px 12px; background: var(--teal-light); display: flex; align-items: center; border-bottom: 0.5px solid var(--gray-border); }
+  .sch-meal { font-size: 12px; color: var(--text-sub); padding: 10px 12px; background: var(--bg-card); display: flex; align-items: center; border-bottom: 0.5px solid var(--gray-border); }
+  .sch-time:last-of-type, .sch-meal:last-of-type { border-bottom: none; }
+
+  /* ── ALLERGY ── */
+  .allergy-intro { background: var(--coral-light); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: #993C1D; line-height: 1.6; }
+  .allergy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .allergy-item { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); padding: 0.875rem; display: flex; gap: 10px; align-items: flex-start; }
+  .allergy-icon { width: 34px; height: 34px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .ai-red { background: #FCEBEB; }
+  .ai-amber { background: var(--amber-light); }
+  .ai-blue { background: var(--blue-light); }
+  .allergy-name { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .allergy-desc { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
+  .badge-red { background: #FCEBEB; color: #A32D2D; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+  .badge-amber { background: var(--amber-light); color: #854F0B; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+  .badge-blue { background: var(--blue-light); color: #185FA5; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+  .symptom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .symptom-card { background: var(--bg-surface); border-radius: 10px; padding: 0.75rem; text-align: center; }
+  .symptom-card .s-icon { font-size: 20px; margin-bottom: 4px; }
+  .symptom-card .s-name { font-size: 12px; font-weight: 500; }
+  .symptom-card .s-detail { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+
+  /* ── CHECKER ── */
+  .checker-list { display: grid; gap: 6px; }
+  .checker-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: 10px; cursor: pointer; transition: background 0.15s; }
+  .checker-item:hover { background: var(--bg-surface); }
+  .checker-item.checked { background: var(--teal-light); border-color: #5DCAA5; }
+  .checker-box { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .checker-item.checked .checker-box { background: var(--teal); border-color: var(--teal); }
+  .checker-label { font-size: 13px; }
+
+  /* ── REJECT ── */
+  .reject-stage { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); padding: 1rem; margin-bottom: 12px; }
+  .stage-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .stage-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+  .sn-blue { background: var(--blue-light); color: var(--blue-dark); }
+  .sn-amber { background: var(--amber-light); color: var(--amber-dark); }
+  .sn-teal { background: var(--teal-light); color: var(--teal-dark); }
+  .stage-title { font-size: 14px; font-weight: 500; }
+  .stage-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; }
+  .tip-list { display: grid; gap: 5px; }
+  .tip-item { font-size: 12px; color: var(--text-sub); padding: 6px 10px; background: var(--bg-surface); border-radius: 8px; display: flex; gap: 6px; align-items: flex-start; }
+  .tip-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); margin-top: 5px; flex-shrink: 0; }
+  .reject-quick { background: var(--bg-surface); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .reject-quick-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; }
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .quick-item { font-size: 12px; color: var(--text-sub); padding: 8px 10px; background: var(--bg-card); border-radius: 8px; border: 0.5px solid var(--gray-border); }
+
+  /* ── TIPS ── */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .tip-card { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); padding: 1rem; }
+  .tip-card-icon { font-size: 20px; margin-bottom: 8px; }
+  .tip-card-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .tip-card-body { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .warn-box { background: var(--amber-light); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .warn-box p { font-size: 12px; color: var(--amber-dark); line-height: 1.7; }
+  .warn-box strong { font-weight: 500; color: #4A2701; }
+
+  /* ── RECIPE ── */
+  .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+  .rc { background: var(--bg-card); border: 0.5px solid var(--gray-border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.18s; overflow: hidden; }
+  .rc:hover { border-color: #aaa; }
+  .rc.sel { border-width: 1.5px; }
+  .rc-top { padding: 14px 14px 10px; }
+  .rc-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .rc-sub { font-size: 12px; color: var(--text-sub); line-height: 1.5; }
+  .rc-meta { display: flex; gap: 8px; padding: 10px 14px; border-top: 0.5px solid var(--gray-border); background: var(--bg-surface); }
+  .meta-pill { font-size: 11px; color: var(--text-sub); }
+  .r-detail { background: var(--bg-surface); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .r-detail h3 { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .col-box { background: var(--bg-card); border-radius: 10px; padding: 0.875rem; border: 0.5px solid var(--gray-border); }
+  .col-title { font-size: 11px; font-weight: 500; color: var(--text-sub); margin-bottom: 8px; letter-spacing: 0.4px; }
+  .ing-item { font-size: 12px; padding: 4px 0; border-bottom: 0.5px solid var(--gray-border); display: flex; justify-content: space-between; }
+  .ing-item:last-child { border-bottom: none; }
+  .ing-amt { color: var(--text-sub); }
+  .step-list { display: grid; gap: 8px; }
+  .step-item { display: flex; gap: 10px; align-items: flex-start; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .step-text { font-size: 12px; color: var(--text-sub); line-height: 1.6; padding-top: 3px; }
+  .recipe-tip { background: var(--bg-card); border-radius: 8px; padding: 10px 12px; border: 0.5px solid var(--gray-border); font-size: 12px; color: var(--text-sub); line-height: 1.6; margin-top: 8px; }
+  .recipe-tip strong { color: var(--text); font-weight: 500; }
+
+  /* ── STAGE TABS for recipes ── */
+  .stab { flex-shrink: 0; padding: 7px 14px; border-radius: 20px; border: 0.5px solid var(--gray-border); background: var(--bg-card); font-size: 12px; color: var(--text-sub); cursor: pointer; transition: all 0.18s; font-family: 'Noto Sans KR', sans-serif; }
+  .stab.on.s0 { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 500; }
+  .stab.on.s1 { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 500; }
+  .stab.on.s2 { background: var(--amber); border-color: var(--amber); color: #fff; font-weight: 500; }
+  .stab.on.s3 { background: var(--coral); border-color: var(--coral); color: #fff; font-weight: 500; }
+  .rc.sel.s0 { border-color: var(--teal); }
+  .rc.sel.s1 { border-color: var(--blue); }
+  .rc.sel.s2 { border-color: var(--amber); }
+  .rc.sel.s3 { border-color: var(--coral); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 0.5px solid var(--gray-border); padding: 2rem 1.5rem; text-align: center; font-size: 12px; color: var(--text-hint); }
+
+  /* ── FADE ANIM ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .fadein { animation: fadeUp 0.25s ease; }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="pw-screen">
+  <div class="pw-box">
+    <div class="pw-logo">🥣 이유식 완벽 가이드</div>
+    <div class="pw-sub">여누데이 블로그 전용 콘텐츠예요</div>
+    <a class="pw-blog" href="https://blog.naver.com/yeonuday_" target="_blank">blog.naver.com/yeonuday_</a>
+    <div class="pw-input-wrap">
+      <input type="password" id="pw-input" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')checkPw()">
+      <button onclick="checkPw()">입장</button>
+    </div>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+
+<div id="main-content">
+<nav class="site-nav">
+  <div class="nav-logo">🥣 이유식 완벽 가이드</div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('guide',this)">월령별 가이드</button>
+    <button class="nav-link" onclick="showPage('recipe',this)">레시피</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">초보 엄마도 전문가처럼</div>
+  <h1>월령별 식단부터 거부 대처까지<br>이유식 성공 완벽 가이드</h1>
+  <p>월령별 식단표 · 알레르기 체크리스트 · 거부 대처법 · 레시피 모음</p>
+</div>
+
+<!-- ════ PAGE: GUIDE ════ -->
+<div id="page-guide" class="page-section active">
+  <div class="section-wrap">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('diet',this)">월령별 식단표</button>
+      <button class="tab-btn" onclick="showTab('allergy',this)">알레르기 체크</button>
+      <button class="tab-btn" onclick="showTab('reject',this)">거부 대처법</button>
+      <button class="tab-btn" onclick="showTab('tips',this)">성공 팁</button>
+    </div>
+
+    <!-- DIET -->
+    <div id="tab-diet" class="fadein">
+      <div class="sec-title"><span class="sec-title-bar" style="background:var(--teal)"></span>월령별 이유식 단계</div>
+      <div class="month-grid" id="monthGrid"></div>
+      <div id="monthDetail"></div>
+      <div style="margin-top:1.5rem">
+        <div class="sec-title" style="font-size:14px;margin-bottom:12px"><span class="sec-title-bar" style="background:var(--teal)"></span>하루 식사 스케줄 예시</div>
+        <div id="scheduleGrid" class="schedule-grid"></div>
+      </div>
+    </div>
+
+    <!-- ALLERGY -->
+    <div id="tab-allergy" class="fadein" style="display:none">
+      <div class="sec-title"><span class="sec-title-bar" style="background:var(--coral)"></span>알레르기 체크리스트</div>
+      <div class="allergy-intro">새 식재료는 반드시 <strong>3~5일 간격</strong>으로 한 가지씩 도입하세요. 도입 후 피부, 소화, 호흡 변화를 관찰하세요.</div>
+      <div class="allergy-grid">
+        <div class="allergy-item"><div class="allergy-icon ai-red">🥚</div><div><div class="allergy-name">달걀</div><div class="allergy-desc">흰자 먼저 피하고 노른자부터. 가열 후 소량 도입.</div><span class="badge-red">고위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-red">🥜</div><div><div class="allergy-name">땅콩·견과류</div><div class="allergy-desc">분말 형태로 소량 시작. 아나필락시스 주의.</div><span class="badge-red">고위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-red">🐄</div><div><div class="allergy-name">유제품</div><div class="allergy-desc">생우유는 12개월 이후 권장. 치즈·요거트는 후기부터.</div><span class="badge-red">고위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-red">🌾</div><div><div class="allergy-name">밀(글루텐)</div><div class="allergy-desc">국수·빵 도입 전 소량 테스트 필수.</div><span class="badge-red">고위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-amber">🐟</div><div><div class="allergy-name">흰살생선</div><div class="allergy-desc">도미·광어부터 시작. 등푸른생선은 후기 이후.</div><span class="badge-amber">중위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-amber">🍓</div><div><div class="allergy-name">딸기·토마토</div><div class="allergy-desc">산도 높아 구강 주위 발진 유발 가능.</div><span class="badge-amber">중위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-blue">🥦</div><div><div class="allergy-name">브로콜리·양배추</div><div class="allergy-desc">가스 유발 가능. 충분히 익혀 소량 시작.</div><span class="badge-blue">저위험</span></div></div>
+        <div class="allergy-item"><div class="allergy-icon ai-blue">🍗</div><div><div class="allergy-name">닭고기</div><div class="allergy-desc">알레르기 드물어 초기부터 사용 가능한 단백질.</div><span class="badge-blue">저위험</span></div></div>
+      </div>
+      <div class="sec-title" style="font-size:14px;margin-bottom:12px"><span class="sec-title-bar" style="background:var(--coral)"></span>알레르기 반응 증상</div>
+      <div class="symptom-grid" style="margin-bottom:1.5rem">
+        <div class="symptom-card"><div class="s-icon">🔴</div><div class="s-name">피부 발진</div><div class="s-detail">두드러기, 붉어짐</div></div>
+        <div class="symptom-card"><div class="s-icon">😮</div><div class="s-name">구강 부종</div><div class="s-detail">입술·혀 붓기</div></div>
+        <div class="symptom-card"><div class="s-icon">🤢</div><div class="s-name">소화 이상</div><div class="s-detail">구토, 설사</div></div>
+        <div class="symptom-card"><div class="s-icon">😮‍💨</div><div class="s-name">호흡 이상</div><div class="s-detail">쌕쌕거림, 기침</div></div>
+        <div class="symptom-card"><div class="s-icon">😢</div><div class="s-name">과도한 울음</div><div class="s-detail">복통 신호 가능</div></div>
+        <div class="symptom-card"><div class="s-icon">🏥</div><div class="s-name">즉시 내원</div><div class="s-detail">호흡·부종 시</div></div>
+      </div>
+      <div class="sec-title" style="font-size:14px;margin-bottom:12px"><span class="sec-title-bar" style="background:var(--coral)"></span>식재료 도입 일지</div>
+      <div class="checker-list">
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">쌀 미음 — 초기 첫 번째 식재료</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">감자 — 탄수화물 도입</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">애호박 — 소화 쉬운 채소</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">당근 — 베타카로틴 채소</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">닭고기 — 단백질 첫 도입</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">달걀 노른자 — 고위험 식품</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">두부 — 식물성 단백질</span></div>
+        <div class="checker-item" onclick="toggleCheck(this)"><div class="checker-box"></div><span class="checker-label">흰살생선 — 동물성 단백질 확장</span></div>
+      </div>
+    </div>
+
+    <!-- REJECT -->
+    <div id="tab-reject" class="fadein" style="display:none">
+      <div class="sec-title"><span class="sec-title-bar" style="background:var(--blue)"></span>거부 단계별 대처법</div>
+      <div class="reject-stage"><div class="stage-header"><div class="stage-num sn-blue">1</div><div class="stage-title">처음 거부 — 낯섦 단계</div></div><div class="stage-sub">시작 후 1~2주. 새로운 맛·질감에 적응 중</div><div class="tip-list"><div class="tip-item"><div class="tip-dot"></div>15~20회 노출이 필요할 수 있음. 포기하지 않기</div><div class="tip-item"><div class="tip-dot"></div>모유/분유 수유 1~2시간 후 배고플 때 시도</div><div class="tip-item"><div class="tip-dot"></div>작은 숟가락으로 0.5~1티스푼부터</div><div class="tip-item"><div class="tip-dot"></div>억지로 먹이지 않기 — 식사를 부정적 경험과 연결 금지</div></div></div>
+      <div class="reject-stage"><div class="stage-header"><div class="stage-num sn-amber">2</div><div class="stage-title">지속적 거부 — 원인 파악 단계</div></div><div class="stage-sub">1개월 이상 지속될 때. 원인을 분석해야 할 때</div><div class="tip-list"><div class="tip-item"><div class="tip-dot"></div>질감 문제: 더 곱게 갈거나 반대로 덩어리 늘려보기</div><div class="tip-item"><div class="tip-dot"></div>온도 확인: 체온(37도) 정도가 선호도 높음</div><div class="tip-item"><div class="tip-dot"></div>시간 변경: 오전보다 오후가 더 잘 먹는 아기도 있음</div><div class="tip-item"><div class="tip-dot"></div>좋아하는 식재료에 새 재료를 소량 혼합</div></div></div>
+      <div class="reject-stage"><div class="stage-header"><div class="stage-num sn-teal">3</div><div class="stage-title">환경 개선 — 즐거운 식사 만들기</div></div><div class="stage-sub">환경과 분위기를 바꾸는 전략</div><div class="tip-list"><div class="tip-item"><div class="tip-dot"></div>가족과 함께 식사하며 엄마가 먹는 모습 보여주기</div><div class="tip-item"><div class="tip-dot"></div>밝고 안정된 환경, TV·휴대폰 끄기</div><div class="tip-item"><div class="tip-dot"></div>식탁·의자·그릇을 아기 전용으로 일관되게</div><div class="tip-item"><div class="tip-dot"></div>식재료를 함께 만지게 해 음식에 친숙해지게</div></div></div>
+      <div class="reject-quick"><div class="reject-quick-title">거부 원인 빠른 체크</div><div class="quick-grid"><div class="quick-item">배고프지 않아서 → 수유 간격 조절</div><div class="quick-item">이앓이 → 차가운 음식 시도</div><div class="quick-item">컨디션 저조 → 다음날 재시도</div><div class="quick-item">질감 거부 → 단계 낮추기</div></div></div>
+    </div>
+
+    <!-- TIPS -->
+    <div id="tab-tips" class="fadein" style="display:none">
+      <div class="sec-title"><span class="sec-title-bar" style="background:var(--amber)"></span>이유식 성공 핵심 팁</div>
+      <div class="tips-grid">
+        <div class="tip-card"><div class="tip-card-icon">🥄</div><div class="tip-card-title">도구 준비</div><div class="tip-card-body">유아용 숟가락은 작고 얕은 것 선택. 실리콘 재질이 잇몸에 안전. 이유식 의자는 발이 바닥에 닿는 높이로.</div></div>
+        <div class="tip-card"><div class="tip-card-icon">❄️</div><div class="tip-card-title">보관법</div><div class="tip-card-body">한 번에 대량 조리 후 1회분씩 냉동. 냉동은 2주 이내, 냉장은 2일 이내. 해동은 냉장 이동 후 중탕 가열.</div></div>
+        <div class="tip-card"><div class="tip-card-icon">🧂</div><div class="tip-card-title">간 하지 않기</div><div class="tip-card-body">만 1세 전까지 소금·간장·설탕 금지. 신장 부담 위험. 식재료 자체의 자연스러운 단맛·감칠맛 활용.</div></div>
+        <div class="tip-card"><div class="tip-card-icon">📸</div><div class="tip-card-title">식사 일지 기록</div><div class="tip-card-body">새 식재료 도입일, 거부 반응, 섭취량을 간단히 기록. 알레르기 발생 시 원인 파악에 결정적 도움.</div></div>
+        <div class="tip-card"><div class="tip-card-icon">🌡️</div><div class="tip-card-title">적정 온도</div><div class="tip-card-body">36~37°C가 이상적. 손목 안쪽에 떨어뜨려 체온과 비슷하면 OK. 전자레인지 후 반드시 저어서 열 균일화.</div></div>
+        <div class="tip-card"><div class="tip-card-icon">⏱️</div><div class="tip-card-title">식사 시간</div><div class="tip-card-body">한 끼에 20~30분을 넘기지 않기. 길어지면 스트레스 유발. 안 먹으면 다음 끼니에 시도하는 여유 필요.</div></div>
+      </div>
+      <div class="warn-box"><p><strong>절대 주의 식재료</strong><br>꿀 (보툴리눔균, 만 1세 전 절대 금지) · 생달걀 · 날생선 · 짠 치즈 · 가공육 · 포도 통째로 (질식 위험) · 팝콘 · 딱딱한 견과류 통째로</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PAGE: RECIPE ════ -->
+<div id="page-recipe" class="page-section">
+  <div class="section-wrap">
+    <div class="tab-nav" id="stageTabs"></div>
+    <div class="recipe-grid" id="recipeGrid"></div>
+    <div id="recipeDetail"></div>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:8px">
+    <a href="https://blog.naver.com/yeonuday_" target="_blank" style="color:#1D9E75;text-decoration:none;font-weight:500;font-size:13px">📝 여누데이 블로그 — blog.naver.com/yeonuday_</a>
+  </p>
+  <p>이 가이드는 일반적인 정보 제공 목적입니다. 아기의 발달과 건강 상태에 따라 소아과 전문의와 상담하세요.</p>
+</footer>
+</div>
+
+<script>
+// ── Page & Tab navigation ──
+function showPage(id, btn) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+let activeTab = 'diet';
+function showTab(id, btn) {
+  document.querySelectorAll('#page-guide [id^="tab-"]').forEach(s => { s.style.display = 'none'; });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById('tab-' + id);
+  el.style.display = 'block';
+  el.classList.add('fadein');
+  btn.classList.add('active');
+  activeTab = id;
+}
+
+// ── Month data ──
+const monthData = [
+  { label: '초기 4~6개월', texture: '묽은 미음 (쌀:물 = 1:10)', amount: '2~3큰술', freq: '하루 1회',
+    foods: [['쌀 미음','기본 이유식'],['감자','탄수화물'],['애호박','소화 쉬운 채소'],['당근','베타카로틴'],['브로콜리','비타민'],['단호박','단맛 채소']],
+    schedule: [['오전 10시','이유식 1회 (2~3큰술)'],['오후 2시','모유/분유'],['오후 6시','모유/분유'],['밤','모유/분유']] },
+  { label: '중기 7~8개월', texture: '으깬 죽 (쌀:물 = 1:5)', amount: '60~100ml', freq: '하루 2회',
+    foods: [['닭고기 죽','단백질 도입'],['두부','식물성 단백질'],['달걀 노른자','철분 보충'],['시금치','철분 채소'],['배','과일 도입'],['흰살생선','동물성 단백질']],
+    schedule: [['오전 10시','이유식 1회 (80ml)'],['오후 2시','이유식 2회 (80ml)'],['오후 6시','모유/분유'],['밤','모유/분유']] },
+  { label: '후기 9~11개월', texture: '무른 밥 / 작은 덩어리', amount: '120~150ml', freq: '하루 3회',
+    foods: [['소고기 밥','헴철 공급'],['달걀 스크램블','완전식품'],['치즈','칼슘 보충'],['연어','오메가3'],['브로콜리찜','식이섬유'],['고구마','에너지']],
+    schedule: [['오전 8시','이유식 (130ml)'],['오후 12시','이유식 (130ml)'],['오후 6시','이유식 (130ml)'],['간식','과일 30g 정도']] },
+  { label: '완료기 12개월+', texture: '진밥 → 일반식 전환', amount: '180~200ml', freq: '3회 + 간식 2회',
+    foods: [['가족 식사 기반','간만 줄이기'],['야채볶음밥','다양한 채소'],['미역국','요오드 보충'],['고등어구이','오메가3'],['과일 요거트','간식 활용'],['두부조림','단백질']],
+    schedule: [['오전 8시','아침 식사'],['오전 10시','오전 간식'],['오후 12시','점심 식사'],['오후 3시','오후 간식'],['오후 6시','저녁 식사']] }
+];
+let selMonth = 0;
+function renderMonthGrid() {
+  document.getElementById('monthGrid').innerHTML = monthData.map((d, i) =>
+    `<div class="month-card${i === selMonth ? ' selected' : ''}" onclick="selectMonth(${i},this)">
+      <div class="month-label">${['초기','중기','후기','완료기'][i]}</div>
+      <div class="month-title">${d.label}</div>
+      <span class="tag tag-teal" style="margin-right:3px">${d.freq}</span>
+      <span class="tag tag-amber">${d.texture.split(' ')[0]}</span>
+    </div>`).join('');
+}
+function renderMonthDetail(i) {
+  const d = monthData[i];
+  const fl = d.foods.map(f => `<div class="food-item"><strong>${f[0]}</strong>${f[1]}</div>`).join('');
+  document.getElementById('monthDetail').innerHTML = `<div class="detail-box"><h3>${d.label} 상세 가이드</h3><div class="meta-row"><div class="meta-item"><span>질감</span>${d.texture}</div><div class="meta-item"><span>1회량</span>${d.amount}</div><div class="meta-item"><span>횟수</span>${d.freq}</div></div><div class="sec-title" style="font-size:13px;margin-bottom:8px">추천 식재료</div><div class="food-list">${fl}</div></div>`;
+  const sl = d.schedule.map(s => `<div class="sch-time">${s[0]}</div><div class="sch-meal">${s[1]}</div>`).join('');
+  document.getElementById('scheduleGrid').innerHTML = sl;
+}
+function selectMonth(i, el) {
+  selMonth = i;
+  document.querySelectorAll('.month-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  renderMonthDetail(i);
+}
+
+// ── Checker ──
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  const box = el.querySelector('.checker-box');
+  box.innerHTML = el.classList.contains('checked') ? '<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '';
+}
+
+// ── Recipes ──
+const stages = [
+  { label: '초기 4~6개월', cls: 's0', bcls: 'tag-teal', ncls: 'sn-teal', numBg: '#E1F5EE', numColor: '#085041' },
+  { label: '중기 7~8개월', cls: 's1', bcls: 'tag-blue', ncls: 'sn-blue', numBg: '#E6F1FB', numColor: '#0C447C' },
+  { label: '후기 9~11개월', cls: 's2', bcls: 'tag-amber', ncls: 'sn-amber', numBg: '#FAEEDA', numColor: '#633806' },
+  { label: '완료기 12개월+', cls: 's3', bcls: 'tag-coral', ncls: 'sn-coral', numBg: '#FAECE7', numColor: '#712B13' }
+];
+const recipes = [
+  { stage:0, name:'쌀 미음', sub:'이유식 첫 번째 관문', time:'15분', amount:'2~3큰술', diff:'쉬움', ings:[['쌀','10g'],['물','100ml']], steps:['쌀을 30분 이상 물에 불린다.','믹서에 불린 쌀과 물을 넣고 곱게 간다.','냄비에 담아 중약불로 10분간 저으며 끓인다.','체에 걸러 매끄럽게 만든다.','체온과 비슷하게 식혀 제공한다.'], tip:'쌀:물 = 1:10 비율이 기준. 먹는 양이 늘면 물을 줄여 1:7 → 1:5로 농도를 높여가세요.' },
+  { stage:0, name:'단호박 미음', sub:'달콤한 채소 첫 도전', time:'20분', amount:'2~3큰술', diff:'쉬움', ings:[['쌀','10g'],['단호박','20g'],['물','100ml']], steps:['단호박은 씨 제거 후 찜기에 10분 찐다.','쌀은 30분 불린다.','쪄낸 단호박 과육과 불린 쌀, 물을 믹서에 넣고 곱게 간다.','냄비에서 중약불로 저으며 8분 끓인다.','체에 거른 뒤 식혀 제공한다.'], tip:'단호박은 달콤해서 거부감이 낮아 채소 첫 도입으로 좋아요. 껍질은 제거하고 과육만 사용하세요.' },
+  { stage:0, name:'감자 미음', sub:'포만감 높은 탄수화물', time:'20분', amount:'2~4큰술', diff:'쉬움', ings:[['쌀','10g'],['감자','25g'],['물','100ml']], steps:['감자를 껍질 벗기고 작게 썰어 10분 찐다.','쌀은 30분 불린다.','찐 감자, 불린 쌀, 물을 믹서에 넣고 곱게 간다.','냄비에서 약불로 저으며 8~10분 끓인다.','알맞게 식혀 제공한다.'], tip:'감자는 전분이 많아 빨리 걸쭉해져요. 물 양을 조금 더 늘려 농도를 조절하세요.' },
+  { stage:1, name:'닭고기 애호박 죽', sub:'단백질 첫 도입 레시피', time:'25분', amount:'60~80ml', diff:'보통', ings:[['쌀','20g'],['닭 안심','20g'],['애호박','20g'],['물','150ml']], steps:['닭 안심은 찬물에 삶아 핏물 제거 후 잘게 찢는다.','쌀은 30분 불리고, 애호박은 껍질 벗겨 작게 썬다.','믹서에 모든 재료를 넣고 조금 거칠게 간다.','냄비에서 중약불로 저으며 10~12분 끓인다.','약 5mm 크기 덩어리가 약간 남아도 OK.'], tip:'중기부터는 완전히 갈지 않고 조금 거친 질감을 남겨 씹는 연습을 시켜주세요.' },
+  { stage:1, name:'달걀 노른자 죽', sub:'철분 보충 핵심 레시피', time:'20분', amount:'60~80ml', diff:'쉬움', ings:[['쌀','20g'],['달걀 노른자','1개'],['당근','15g'],['물','160ml']], steps:['쌀 30분 불리고, 당근은 잘게 썰어 찐다.','달걀을 삶아 노른자만 분리한다.','쌀, 찐 당근, 물을 넣고 죽을 끓인다.','마지막에 으깬 노른자를 넣고 2분 더 끓인다.','잘 섞어 서빙한다.'], tip:'달걀 흰자는 알레르기 위험이 높아 중기(7개월) 이후에, 완전히 익혀서 도입하세요.' },
+  { stage:1, name:'두부 시금치 죽', sub:'식물성 단백질 + 철분', time:'20분', amount:'70~90ml', diff:'쉬움', ings:[['쌀','20g'],['두부','30g'],['시금치','15g'],['물','150ml']], steps:['시금치를 끓는 물에 30초 데쳐 찬물에 헹군 뒤 잘게 다진다.','두부는 끓는 물에 1분 데쳐 으깬다.','쌀은 30분 불린다.','쌀, 물을 죽으로 끓이다 두부와 시금치를 넣고 5분 더 끓인다.'], tip:'시금치의 수산은 데치면 대부분 제거돼요. 철분 흡수도 높아집니다.' },
+  { stage:2, name:'소고기 미역 무른밥', sub:'이유식 영양왕 콤보', time:'30분', amount:'120~140ml', diff:'보통', ings:[['쌀','30g'],['소고기 다짐육','25g'],['불린 미역','10g'],['물','180ml']], steps:['쌀은 30분 불린다. 미역은 30분 불려 잘게 다진다.','소고기는 찬물에서 핏물 제거 후 다진다.','냄비에 쌀과 물을 넣어 무른밥 농도로 끓이기 시작한다.','중간에 소고기를 넣어 완전히 익힌다.','마지막에 미역을 넣고 3분 더 끓인다.'], tip:'소고기의 헴철은 식물성 철분보다 흡수율이 2~3배 높아요. 후기의 핵심 식재료입니다.' },
+  { stage:2, name:'연두부 브로콜리밥', sub:'부드럽고 영양 풍부', time:'25분', amount:'120~150ml', diff:'쉬움', ings:[['쌀','30g'],['연두부','40g'],['브로콜리','25g'],['물','170ml']], steps:['브로콜리를 꽃 부분만 잘게 다진다.','쌀은 30분 불린다.','냄비에 쌀, 물로 무른밥을 끓이기 시작한다.','브로콜리를 넣어 5분 더 익힌다.','마지막에 연두부를 조각으로 넣어 2분 더 익힌다.'], tip:'브로콜리는 꽃 부분만, 아주 잘게 다져야 후기 이유식에 적합해요.' },
+  { stage:3, name:'소고기 볶음밥', sub:'일반식 전환 첫걸음', time:'20분', amount:'180~200ml', diff:'보통', ings:[['진밥','100g'],['소고기 다짐육','30g'],['양파','20g'],['당근','15g']], steps:['양파, 당근을 5mm 이하로 잘게 다진다.','팬에 기름 없이 소고기를 볶아 익힌다.','양파, 당근 순서로 넣어 볶는다.','진밥을 넣고 함께 볶아 고루 섞는다.','간은 하지 않고 식재료 자연 맛으로 마무리.'], tip:'완료기부터 기름을 소량 사용할 수 있어요. 포도씨유나 들기름을 한 방울 정도만 사용하세요.' },
+  { stage:3, name:'두부 달걀찜', sub:'부드러운 완전식품', time:'15분', amount:'1인분', diff:'쉬움', ings:[['달걀','1개'],['두부','50g'],['당근','10g'],['물','50ml']], steps:['달걀을 풀어 물과 섞는다.','두부는 으깨고 당근은 아주 잘게 다진다.','달걀물에 두부, 당근을 넣고 섞는다.','찜기에 넣어 중불로 10~12분 찐다.','젓가락으로 찔러 맑은 물이 나오면 완성.'], tip:'달걀찜은 완료기 아기가 스스로 떠먹기 연습하기 좋은 음식이에요.' }
+];
+let curStage = 0, curRecipe = 0;
+function stageRecipes(s) { return recipes.filter(r => r.stage === s); }
+function renderStageTabs() {
+  document.getElementById('stageTabs').innerHTML = stages.map((s, i) =>
+    `<button class="stab ${s.cls}${i === curStage ? ' on' : ''}" onclick="switchStage(${i})">${s.label}</button>`).join('');
+}
+function renderRecipeGrid() {
+  const sr = stageRecipes(curStage);
+  const s = stages[curStage];
+  document.getElementById('recipeGrid').innerHTML = sr.map((r, i) =>
+    `<div class="rc ${s.cls}${i === curRecipe ? ' sel' : ''}" onclick="selectRecipe(${i})">
+      <div class="rc-top"><span class="tag ${s.bcls}" style="margin-bottom:8px;display:inline-block">${s.label}</span><div class="rc-name">${r.name}</div><div class="rc-sub">${r.sub}</div></div>
+      <div class="rc-meta"><span class="meta-pill">⏱ ${r.time}</span><span class="meta-pill">· ${r.amount}</span><span class="meta-pill">· ${r.diff}</span></div>
+    </div>`).join('');
+}
+function renderRecipeDetail() {
+  const r = stageRecipes(curStage)[curRecipe];
+  const s = stages[curStage];
+  const ings = r.ings.map(i => `<div class="ing-item"><span>${i[0]}</span><span class="ing-amt">${i[1]}</span></div>`).join('');
+  const steps = r.steps.map((st, i) =>
+    `<div class="step-item"><div class="step-num" style="background:${s.numBg};color:${s.numColor}">${i+1}</div><div class="step-text">${st}</div></div>`).join('');
+  document.getElementById('recipeDetail').innerHTML =
+    `<div class="r-detail fadein"><h3>${r.name} 만들기</h3><div class="two-col"><div class="col-box"><div class="col-title">재료</div>${ings}</div><div class="col-box"><div class="col-title">조리 정보</div><div class="ing-item"><span>소요시간</span><span class="ing-amt">${r.time}</span></div><div class="ing-item"><span>1회 제공량</span><span class="ing-amt">${r.amount}</span></div><div class="ing-item"><span>난이도</span><span class="ing-amt">${r.diff}</span></div></div></div><div class="step-list">${steps}</div><div class="recipe-tip"><strong>엄마 팁</strong> — ${r.tip}</div></div>`;
+}
+function switchStage(i) { curStage = i; curRecipe = 0; renderStageTabs(); renderRecipeGrid(); renderRecipeDetail(); }
+function selectRecipe(i) { curRecipe = i; renderRecipeGrid(); renderRecipeDetail(); }
+
+// ── Password ──
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === 'yeonuday') {
+    document.getElementById('pw-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  } else {
+    document.getElementById('pw-error').textContent = '비밀번호가 틀렸어요 🙅';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+// ── Init ──
+renderMonthGrid();
+renderMonthDetail(0);
+renderStageTabs();
+renderRecipeGrid();
+renderRecipeDetail();
+</script>
+</body>
+</html>
